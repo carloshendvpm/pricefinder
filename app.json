@@ -16,7 +16,8 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.hencarlosdvpm.precosmix"
     },
     "description": ""
   }

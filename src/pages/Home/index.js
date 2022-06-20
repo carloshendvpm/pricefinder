@@ -20,7 +20,7 @@ export default function Home() {
     const navigation = useNavigation()
    
  return (
-    <SafeAreaView>
+    <View>
         <HeaderConcorrenteAdmin
         title="Concorrentes"
         />
@@ -42,12 +42,7 @@ export default function Home() {
                 color="red"
             />
            </View>
-            
-        {/* <TextInput
-        style={styles.input}
-        placeholder="Pesquisar"
-        /> */}
-    </SafeAreaView>
+    </View>
   );
 }
 

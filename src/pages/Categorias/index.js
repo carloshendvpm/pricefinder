@@ -28,29 +28,20 @@ export default function Categorias() {
      <CategoryCard
      tipo="Aves"
      bg="blue"
+     navigation="Produtos"
      />
      <CategoryCard
      tipo="Bebidas"
      bg="orange"
      icon="beer"
+     navigation="Produtos"
      />
      <CategoryCard
      tipo="Hortifruti"
      bg="green"
      icon="fruit-cherries"
+     navigation="Produtos"
      />
-     {/* <CategoryCard
-     tipo="Aves"
-     label="Av"
-     />
-     <CategoryCard
-     tipo="Bebidas"
-     label="Be"
-     />
-     <CategoryCard
-     tipo="Hortifruti"
-     label="Hr"
-     /> */}
    </View>
   );
 }
