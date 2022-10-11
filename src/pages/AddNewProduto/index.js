@@ -1,15 +1,59 @@
-import React from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView, ScrollView } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, Text, StyleSheet, KeyboardAvoidingView, ScrollView, Modal} from 'react-native';
 import { TextInput, Button } from 'react-native-paper'
 import HeaderConcorrenteAdmin from '../../shared/components/HeaderConcorrenteAdmin';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import Scanner from '../../shared/components/Scanner'
+
 
 // teste 
 export default function AddNewProduto() {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [hasPermission, setHasPermission] = useState(null);
+    const [scanned, setScanned] = useState(false);
+  
+    useEffect(() => {
+      const getBarCodeScannerPermissions = async () => {
+        const { status } = await BarCodeScanner.requestPermissionsAsync();
+        setHasPermission(status === 'granted');
+      };
+  
+      getBarCodeScannerPermissions();
+    }, []);
+  
+    const handleBarCodeScanned = ({ type, data }) => {
+      setScanned(true);
+      alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    };
+  
+    if (hasPermission === null) {
+      return <Text>Requesting for camera permission</Text>;
+    }
+    if (hasPermission === false) {
+      return <Text>No access to camera</Text>;
+    }
  return (
    <KeyboardAvoidingView
    behavior={Platform.OS == "ios" ? "padding" : "height"}
    keyboardVerticalOffset={50}
    >
+    <Modal
+    visible={modalVisible}
+    transparent={true}
+    animationType="fade"
+    onRequestClose={() => setModalVisible(false)}
+    >
+        <View style={styles.modal}>
+                    <View style={styles.scanner}>
+                <BarCodeScanner
+                    onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                    style={StyleSheet.absoluteFillObject}
+                />
+                {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+                </View>
+            <Button icon="close" mode="contained" onPress={() => setModalVisible(false)}/>
+        </View>
+    </Modal>
        <HeaderConcorrenteAdmin
        title="Adicionar Novo "
        />
@@ -42,12 +86,11 @@ export default function AddNewProduto() {
             mode="outlined"
             style={styles.mainInput}
         />
-        <Button icon="camera" mode="contained-tonal" onPress={() => navigation}>
-            Capturar EAN
-        </Button>
-        <Button style={styles.btnSend}mode="contained">Adicionar produto</Button>
+        
+            <Button title="BUtton" icon="camera" mode="contained-tonal" onPress={() => setModalVisible(true)}>ESCANEAR EAN</Button>        
+            <Button style={styles.btnSend} mode="contained">Adicionar produto</Button>
         </View>
-     </ScrollView>
+    </ScrollView>
    </KeyboardAvoidingView>
   );
 }
@@ -74,5 +117,17 @@ const styles = StyleSheet.create({
     btnSend: {
         width: "100%",
         marginTop:"9%"
+    },
+    modal: {
+        flex:1,
+        alignItems:"center",
+        justifyContent:"space-around",
+        borderRadius: 8,
+    },
+    scanner: {
+        width: "100%",
+        height: "90%",
+        flexDirection:"column",
+        justifyContent:"flex-end"
     }
 })

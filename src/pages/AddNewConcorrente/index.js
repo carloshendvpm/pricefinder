@@ -3,7 +3,6 @@ import { View, StyleSheet } from 'react-native';
 import HeaderConcorrenteAdmin from '../../shared/components/HeaderConcorrenteAdmin';
 import { TextInput, Button } from 'react-native-paper';
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
-import ConcorrentesAdminView from '../ConcorrentesAdminView';
 
 
 export default function AddNewConcorrente() {
