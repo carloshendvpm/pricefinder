@@ -47,12 +47,9 @@ export default function BemVindo() {
        </View>
        <Button
             navigation="Login"
-            btnText="Login comum"
+            btnText="Entrar"
         />
-        <Button
-            navigation="Cadastro"
-            btnText="Login admin"
-        />
+
        {/* <View style={styles.containerBtns}>
            onPress={ () => navigation.navigate('Login') }
             <TouchableOpacity 

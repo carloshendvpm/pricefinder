@@ -4,10 +4,10 @@ import {
 } from "@react-navigation/native-stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import Cadastro from "../pages/Cadastro";
+// import Cadastro from "../pages/Cadastro";
 import BemVindo from "../pages/BemVindo";
 import Login from "../pages/Login";
-import CadastroNovoConcorrente from "../pages/CadastroNovoConcorrente";
+// import CadastroNovoConcorrente from "../pages/CadastroNovoConcorrente";
 import Home from "../pages/Home";
 import Categorias from "../pages/Categorias";
 import Produtos from "../pages/Produtos";
@@ -61,11 +61,11 @@ export default function MainRoutes() {
                 component = {BemVindo}
                 options= {{headerShown : false}}
             />
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="Cadastro"
                 component = {Cadastro}
                 options= {{headerShown : false}}
-            />
+            /> */}
             <Stack.Screen
                 name="Login"
                 component = {Login}
