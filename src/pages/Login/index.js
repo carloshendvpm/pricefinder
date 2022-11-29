@@ -16,7 +16,7 @@ export default function Cadastro() {
     const [nome, setNome] = useState('');
     const [password, setPassword] = useState('');
 
-    const [hidePass, setHidePass] = useState(false);
+    const [hidePass, setHidePass] = useState(true);
 
     const [isError, setIsError] = useState(false);
     const [message, setMessage] = useState('');

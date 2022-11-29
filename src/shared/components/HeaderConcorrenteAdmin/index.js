@@ -19,7 +19,7 @@ export default function HeaderConcorrenteAdmin(props) {
 const styles = StyleSheet.create({
     container: {
         flexDirection:"row",
-        width: 320,
+        width: 280,
         justifyContent:"space-between",
         marginTop:20,
         padding: 15
@@ -27,11 +27,10 @@ const styles = StyleSheet.create({
     qlr: {
         backgroundColor:"#1372B8",
         height: 100,
-        justifyContent:"center"
     },
     title: {
         fontSize:26,
         color: "#FFF",
-        fontFamily:"Poppins_400Regular"
+        fontFamily:"Poppins_400Regular",
     },
 })
