@@ -5,8 +5,7 @@ import { useNavigation, NavigationContainer } from '@react-navigation/native';
 
 
 import HeaderConcorrenteAdmin from '../../shared/components/HeaderConcorrenteAdmin';
-import AddNewProduto from '../AddNewProduto';
-// import ListItem from '../../shared/components/ListItem';
+
 
 const API_URL = Platform.OS === 'ios' ? 'http://localhost:8080/produtos' : 'http://10.0.2.2:8080/produtos';
 
@@ -109,9 +108,6 @@ export default function Produtos() {
             description={item.descricao}
             right={props => <Text>{item.preco && `R$${item.preco}`}</Text>}
           />
-          // <TouchableOpacity style={styles.itemLine} onPress={() => edit(item)}>
-          //   <Text>{item.nome}</Text><Text>{item.descricao} {item.preco}</Text>
-          // </TouchableOpacity>
         )
       }} />
      <Portal>
@@ -148,10 +144,7 @@ export default function Produtos() {
     </Modal>
   </Portal>
 </Provider>
-  //  <View>
-  //    
-  //  </View>
-  );
+);
 }
 const styles = StyleSheet.create({
   btn: {
