@@ -200,6 +200,7 @@ buttonAltText: {
 message: {
     fontSize: 16,
     marginVertical: '5%',
+    alignSelf:"center"
 },
 altTxt: {
   alignSelf:'center',
