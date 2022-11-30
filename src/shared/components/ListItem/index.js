@@ -8,7 +8,7 @@ export default function ListItem(props) {
        <List.Item
       title={props.title}
       description={props.description}
-      right={props => <Text>{props.price || '0'}</Text>}
+      right={props => <Text>{props.right}</Text>}
       />
       <Divider/>
    </TouchableOpacity>

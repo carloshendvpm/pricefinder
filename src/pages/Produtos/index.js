@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import { Modal, Portal, Text, Button, Provider, TextInput } from 'react-native-paper';
+import { View, StyleSheet, TouchableOpacity, FlatList,Text } from 'react-native';
+import { Modal, Portal, Button, Provider, TextInput, List, Divider } from 'react-native-paper';
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 
 
 import HeaderConcorrenteAdmin from '../../shared/components/HeaderConcorrenteAdmin';
 import AddNewProduto from '../AddNewProduto';
-import ListItem from '../../shared/components/ListItem';
+// import ListItem from '../../shared/components/ListItem';
 
 const API_URL = Platform.OS === 'ios' ? 'http://localhost:8080/produtos' : 'http://10.0.2.2:8080/produtos';
 
@@ -17,6 +17,7 @@ export default function Produtos() {
 
   const [novoNome, setNovoNome] = useState('')
   const [novaDescricao, setNovaDescricao] = useState('')
+  const [novoPreco, setNovoPreco] = useState(0)
 
 
   const [produto, setProduto] = useState(null)
@@ -40,10 +41,12 @@ export default function Produtos() {
       const data = {
         nome: novoNome,
         descricao: novaDescricao,
+        preco: novoPreco
       }
       console.log(data)
       setNovoNome('')
       setNovaDescricao('')
+      setNovoPreco('')
       hideModal()
       fetch(API_URL, {
         method: 'POST',
@@ -61,9 +64,11 @@ export default function Produtos() {
   const save = () => {
     const data = {
       id: produto.id,
-      descricao: novaDescricao,
+      preco: novoPreco
     }
-    setNovaDescricao('')
+    console.log(produto.id)
+    console.log(novoPreco)
+    setNovoPreco('')
     setProduto(null)
     fetch(API_URL, {
       method: 'PUT',
@@ -79,7 +84,7 @@ export default function Produtos() {
 
   const edit = (item) => {
     setNovoNome('')
-    setNovaDescricao('')
+    setNovoPreco('')
     setProduto(item)
   }
 
@@ -98,28 +103,32 @@ export default function Produtos() {
      </Button>
      <FlatList data={produtos} keyExtractor={item => `${item.id}`} renderItem={({item}) => {
         return (
-          <ListItem 
+          <List.Item 
             onPress={() => edit(item)}
             title={item.nome}
             description={item.descricao}
+            right={props => <Text>{item.preco && `R$${item.preco}`}</Text>}
           />
           // <TouchableOpacity style={styles.itemLine} onPress={() => edit(item)}>
-          //   <Text>{item.nome}</Text><Text>{item.descricao}</Text>
+          //   <Text>{item.nome}</Text><Text>{item.descricao} {item.preco}</Text>
           // </TouchableOpacity>
         )
       }} />
-        {/* <ListItem
-        title="produto 1"
-        description="produto"
+     <Portal>
+    <Modal visible={produto != null} onDismiss={() => setProduto(null)} contentContainerStyle={containerStyle}>
+    <View style={styles.form}>
+        <TextInput style={[styles.input, {width: '50%', alignSelf: "center"}]} 
+          value={novoPreco} onChangeText={text => setNovoPreco(text)} label="Novo preco" mode='outlined'
         />
-      <ListItem
-      title="Produto 1"
-      description="descrição"
-      />
-      <ListItem
-      title="Produto 1"
-      description="descrição"
-      /> */}
+        <Button style={[styles.button, {width: '50%', marginTop: 20, alignSelf: "center" }]} onPress={save}>
+          <Text>Adicionar</Text>
+        </Button>
+        <Button style={[styles.button, {width: '50%', marginTop: 20, alignSelf: "center" }]} onPress={() => setProduto(null)}>
+          <Text>Cancelar</Text>
+        </Button>
+      </View>
+    </Modal>
+  </Portal>
   <Portal>
     <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
     <View style={styles.form}>
@@ -128,6 +137,9 @@ export default function Produtos() {
         />
         <TextInput style={[styles.input, {width: '50%', alignSelf: "center"}]} 
           value={novaDescricao} onChangeText={text => setNovaDescricao(text)} label="Descrição" mode='outlined'
+        />
+        <TextInput style={[styles.input, {width: '50%', alignSelf: "center"}]} 
+          value={novoPreco} onChangeText={text => setNovoPreco(text)} label="Preco" mode='outlined'
         />
         <Button style={[styles.button, {width: '50%', marginTop: 20, alignSelf: "center" }]} onPress={addItem}>
           <Text>Adicionar</Text>
