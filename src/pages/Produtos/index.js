@@ -11,13 +11,12 @@ const API_URL = Platform.OS === 'ios' ? 'http://localhost:8080/produtos' : 'http
 
 export default function Produtos() {
 
-   const [visible, setVisible] = React.useState(false);
-   const [produtos, setProdutos] = useState([])
+  const [visible, setVisible] = React.useState(false);
+  const [produtos, setProdutos] = useState([])
 
   const [novoNome, setNovoNome] = useState('')
   const [novaDescricao, setNovaDescricao] = useState('')
   const [novoPreco, setNovoPreco] = useState(0)
-
 
   const [produto, setProduto] = useState(null)
 
@@ -87,10 +86,10 @@ export default function Produtos() {
     setProduto(item)
   }
 
-
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const containerStyle = {backgroundColor: '2c2c2c', paddingVertical: 20};
+
   const navigation = useNavigation()
  return (
   <Provider>
@@ -116,10 +115,10 @@ export default function Produtos() {
         <TextInput style={[styles.input, {width: '50%', alignSelf: "center"}]} 
           value={novoPreco} onChangeText={text => setNovoPreco(text)} label="Novo preco" mode='outlined'
         />
-        <Button style={[styles.button, {width: '50%', marginTop: 20, alignSelf: "center" }]} onPress={save}>
-          <Text>Adicionar</Text>
+        <Button mode="contained" style={[styles.button, {width: '50%', marginTop: 20, alignSelf: "center" }]} onPress={save}>
+          <Text>Atualizar</Text>
         </Button>
-        <Button style={[styles.button, {width: '50%', marginTop: 20, alignSelf: "center" }]} onPress={() => setProduto(null)}>
+        <Button mode="contained" style={[styles.button, {width: '50%', marginTop: 20, alignSelf: "center", backgroundColor:"red" }]} onPress={() => setProduto(null)}>
           <Text>Cancelar</Text>
         </Button>
       </View>
@@ -128,16 +127,16 @@ export default function Produtos() {
   <Portal>
     <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
     <View style={styles.form}>
-        <TextInput style={[ {width: '50%', alignSelf: "center", marginBottom: 20}]} 
-          value={novoNome} onChangeText={text => setNovoNome(text)} label="Produto" mode='outlined'
+        <TextInput style={[ {width: '75%', alignSelf: "center", marginBottom: 20}]} 
+          value={novoNome} onChangeText={text => setNovoNome(text)} label="Produto" mode='flat'
         />
-        <TextInput style={[styles.input, {width: '50%', alignSelf: "center"}]} 
-          value={novaDescricao} onChangeText={text => setNovaDescricao(text)} label="Descrição" mode='outlined'
+        <TextInput style={[styles.input, {width: '75%', alignSelf: "center", marginBottom: 20}]} 
+          value={novaDescricao} onChangeText={text => setNovaDescricao(text)} label="Descrição" mode='flat'
         />
-        <TextInput style={[styles.input, {width: '50%', alignSelf: "center"}]} 
-          value={novoPreco} onChangeText={text => setNovoPreco(text)} label="Preco" mode='outlined'
+        <TextInput mode="contained" style={[styles.input, {width: '75%', alignSelf: "center"}]} 
+          value={novoPreco} onChangeText={text => setNovoPreco(text)} label="Preco" mode='flat'
         />
-        <Button style={[styles.button, {width: '50%', marginTop: 20, alignSelf: "center" }]} onPress={addItem}>
+        <Button mode="contained"style={[styles.button, {width: '50%', marginTop: 20, alignSelf: "center" }]} onPress={addItem}>
           <Text>Adicionar</Text>
         </Button>
       </View>
